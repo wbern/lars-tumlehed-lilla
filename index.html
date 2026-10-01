@@ -3,12 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Lars · Tumlehed Lilla 1:18 i 3D</title>
-<meta name="description" content="Interaktiv 3D-terrängmodell och höjdkurvor för Tumlehed Lilla 1:18 i Torslanda, genererad direkt från Lantmäteriets officiella laser/LiDAR-data (Markhöjd Direkt).">
+<title>Lars · Tumlehed Lilla 1:18 (1945 års tomtplan) i 3D</title>
+<meta name="description" content="Interaktiv 3D-terrängmodell, höjdkurvor och officiella gränspunkter för Tumlehed Lilla 1:18 tomtkorridor från Lantmäteriets officiella laser/LiDAR-data.">
 <meta name="theme-color" content="#f4efe8">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Tumlehed Lilla 1:18 · 3D Höjdmodell & Fastighetskarta">
-<meta property="og:description" content="Interaktiv 3D-visualisering av höjdkurvor och fastighetsgränser i SWEREF99 TM / RH2000 med Lantmäteriet LiDAR.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Spectral:wght@400;500;600&display=swap" rel="stylesheet">
@@ -25,7 +22,7 @@
     --oak-deep: #8a5d31;
     --accent: #b54a32;
     --accent-hover: #963823;
-    --sea: #2b6cb0;
+    --blue: #2b6cb0;
     --shadow: 0 4px 20px rgba(60,45,30,0.12), 0 1px 3px rgba(60,45,30,0.06);
   }
   * { box-sizing: border-box; }
@@ -41,18 +38,13 @@
     display: block; touch-action: none;
   }
 
-  /* ── Header ─────────────────────────────────────────── */
   header {
     position: absolute; top: 16px; left: 16px; right: 16px;
-    background: var(--card);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 14px 22px;
-    box-shadow: var(--shadow);
+    background: var(--card); backdrop-filter: blur(10px);
+    border: 1px solid var(--line); border-radius: 16px;
+    padding: 12px 20px; box-shadow: var(--shadow);
     display: flex; align-items: center; justify-content: space-between; gap: 16px;
-    z-index: 10;
-    pointer-events: auto;
+    z-index: 10; pointer-events: auto;
   }
   .title-group { display: flex; flex-direction: column; gap: 2px; }
   .badge {
@@ -60,19 +52,15 @@
     font-weight: 600; color: var(--oak-deep);
   }
   h1 {
-    margin: 0; font-family: "Fraunces", serif; font-size: 20px; font-weight: 700;
+    margin: 0; font-family: "Fraunces", serif; font-size: 19px; font-weight: 700;
     letter-spacing: -0.01em; color: var(--ink);
   }
-  .sub {
-    font-size: 13px; color: var(--ink-soft);
-  }
-  .actions {
-    display: flex; align-items: center; gap: 10px; flex-shrink: 0;
-  }
+  .sub { font-size: 12.5px; color: var(--ink-soft); }
+  .actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
   .btn {
     display: inline-flex; align-items: center; gap: 6px;
-    padding: 8px 16px; border-radius: 20px;
-    font-family: "Spectral", serif; font-size: 13.5px; font-weight: 600;
+    padding: 7px 14px; border-radius: 20px;
+    font-family: "Spectral", serif; font-size: 13px; font-weight: 600;
     cursor: pointer; text-decoration: none; transition: all 0.15s ease;
     border: 1px solid var(--line); background: var(--paper); color: var(--ink);
   }
@@ -82,29 +70,26 @@
   }
   .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
 
-  /* ── Sidebar Controls ───────────────────────────────── */
   #controls {
-    position: absolute; top: 96px; left: 16px; width: 310px;
-    max-height: calc(100vh - 120px); overflow-y: auto;
+    position: absolute; top: 90px; left: 16px; width: 300px;
+    max-height: calc(100vh - 110px); overflow-y: auto;
     background: var(--card); backdrop-filter: blur(10px);
     border: 1px solid var(--line); border-radius: 16px;
-    padding: 18px 20px; box-shadow: var(--shadow);
+    padding: 16px 18px; box-shadow: var(--shadow);
     z-index: 10; pointer-events: auto;
   }
   .section-title {
-    font-family: "Fraunces", serif; font-size: 14px; font-weight: 600;
+    font-family: "Fraunces", serif; font-size: 13.5px; font-weight: 600;
     text-transform: uppercase; letter-spacing: 0.1em;
-    color: var(--oak-deep); margin: 0 0 10px 0; border-bottom: 1px solid var(--line);
-    padding-bottom: 5px;
+    color: var(--oak-deep); margin: 0 0 8px 0; border-bottom: 1px solid var(--line);
+    padding-bottom: 4px;
   }
-  .control-group { margin-bottom: 18px; }
+  .control-group { margin-bottom: 16px; }
   .control-group:last-child { margin-bottom: 0; }
   
-  .cam-btns {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
-  }
+  .cam-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
   .cam-btn {
-    padding: 7px 10px; font-size: 12.5px; border-radius: 8px;
+    padding: 6px 8px; font-size: 12px; border-radius: 8px;
     border: 1px solid var(--line); background: var(--paper);
     cursor: pointer; color: var(--ink); font-family: "Spectral", serif;
     transition: all 0.12s; text-align: center;
@@ -114,65 +99,63 @@
 
   .toggle-row {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 6px 0; font-size: 13.5px;
+    padding: 5px 0; font-size: 13px;
   }
   .toggle-row label { cursor: pointer; user-select: none; }
-  input[type="checkbox"] {
-    accent-color: var(--accent); cursor: pointer; width: 16px; height: 16px;
-  }
+  input[type="checkbox"] { accent-color: var(--accent); cursor: pointer; width: 15px; height: 15px; }
 
-  .slider-row {
-    margin-top: 6px;
-  }
+  .slider-row { margin-top: 5px; }
   .slider-label {
-    display: flex; justify-content: space-between; font-size: 13px; color: var(--ink-soft);
-    margin-bottom: 4px;
+    display: flex; justify-content: space-between; font-size: 12.5px; color: var(--ink-soft);
+    margin-bottom: 3px;
   }
-  input[type="range"] {
-    width: 100%; accent-color: var(--oak-deep); cursor: pointer;
-  }
+  input[type="range"] { width: 100%; accent-color: var(--oak-deep); cursor: pointer; }
 
-  /* ── Legend ─────────────────────────────────────────── */
   .legend-bar {
-    height: 12px; border-radius: 6px; margin: 8px 0 4px;
-    background: linear-gradient(to right, #4075a6 0%, #48a979 25%, #d1cf6a 50%, #b88652 75%, #e0ded9 100%);
+    height: 10px; border-radius: 5px; margin: 6px 0 3px;
+    background: linear-gradient(to right, #4075a6 0%, #48a979 30%, #d1cf6a 60%, #b88652 100%);
     border: 1px solid rgba(0,0,0,0.15);
   }
-  .legend-labels {
-    display: flex; justify-content: space-between; font-size: 11px; color: var(--ink-soft);
-  }
+  .legend-labels { display: flex; justify-content: space-between; font-size: 10.5px; color: var(--ink-soft); }
 
-  /* ── Tooltip ────────────────────────────────────────── */
   #tooltip {
-    position: absolute; bottom: 20px; right: 20px;
+    position: absolute; bottom: 18px; right: 18px;
     background: var(--card); backdrop-filter: blur(10px);
     border: 1px solid var(--line); border-radius: 12px;
-    padding: 10px 16px; box-shadow: var(--shadow);
-    font-size: 13px; z-index: 10; pointer-events: none;
-    min-width: 200px;
+    padding: 8px 14px; box-shadow: var(--shadow);
+    font-size: 12.5px; z-index: 10; pointer-events: none;
+    min-width: 190px;
   }
   #tooltip b { font-family: "Fraunces", serif; color: var(--ink); }
 
-  /* ── Loading Screen ─────────────────────────────────── */
   #loader {
     position: absolute; inset: 0; background: var(--paper);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     z-index: 100; transition: opacity 0.5s ease;
   }
   .spinner {
-    width: 44px; height: 44px; border: 3px solid var(--line);
+    width: 40px; height: 40px; border: 3px solid var(--line);
     border-top-color: var(--accent); border-radius: 50%;
-    animation: spin 0.8s linear infinite; margin-bottom: 16px;
+    animation: spin 0.8s linear infinite; margin-bottom: 14px;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
+  /* 3D Label overlay */
+  .label-3d {
+    position: absolute; font-family: "Fraunces", serif; font-size: 11px; font-weight: 700;
+    color: #1a1a1a; background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(0,0,0,0.18); border-radius: 4px; padding: 1px 5px;
+    pointer-events: none; transform: translate(-50%, -50%);
+    white-space: nowrap; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: opacity 0.2s;
+  }
+  .label-1945 { background: #ffebeb; color: #a82020; border-color: #e07070; }
+  .label-lilleby { background: #ebf3ff; color: #1a4d8c; border-color: #709de0; }
+
   @media (max-width: 768px) {
-    header { flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px 16px; }
+    header { flex-direction: column; align-items: flex-start; gap: 8px; padding: 10px 14px; }
     .actions { width: 100%; justify-content: flex-start; }
-    #controls {
-      top: auto; bottom: 16px; left: 16px; right: 16px; width: auto;
-      max-height: 40vh;
-    }
+    #controls { top: auto; bottom: 14px; left: 14px; right: 14px; width: auto; max-height: 38vh; }
     #tooltip { display: none; }
   }
 </style>
@@ -181,20 +164,20 @@
 
 <div id="loader">
   <div class="spinner"></div>
-  <div style="font-family:'Fraunces',serif; font-size:18px; font-weight:600; color:var(--ink);">Laddar Lantmäteriet 3D Terräng...</div>
-  <div style="font-size:13px; color:var(--ink-soft); margin-top:4px;">Tumlehed Lilla 1:18 · 43 425 mätpunkter (RH2000)</div>
+  <div style="font-family:'Fraunces',serif; font-size:17px; font-weight:600; color:var(--ink);">Laddar 1945 Tomtkorridor i 3D...</div>
+  <div style="font-size:12.5px; color:var(--ink-soft); margin-top:4px;">Tumlehed Lilla 1:18 · 66 Gränspunkter · 37 506 mätpunkter (RH2000)</div>
 </div>
 
 <header>
   <div class="title-group">
-    <div class="badge">Lantmäteriet LiDAR 3D · Torslanda</div>
-    <h1>Tumlehed Lilla 1:18 & Områdesplan</h1>
-    <div class="sub">SWEREF99 TM / RH2000 · Höjdkurvor 0.5 m ekvidistans</div>
+    <div class="badge">1945 Års Avstyckningsplan · Torslanda</div>
+    <h1>Tumlehed Lilla 1:18 Tomtkorridor</h1>
+    <div class="sub">Avgränsat till tomterna mot Lilleby 4:8 & Saltsjön · SWEREF99 TM / RH2000</div>
   </div>
   <div class="actions">
     <button onclick="toggleModal(true)" class="btn btn-primary" title="Ladda ner CAD och rådata">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Ladda ner filer & rådata ▾
+      Ladda ner CAD (.DWG/.DXF) ▾
     </button>
     <a href="Tumlehed_Lilla_1_18_Topografisk_Karta.png" target="_blank" class="btn">
       2D Plankarta
@@ -202,54 +185,61 @@
   </div>
 </header>
 
-<!-- Raw Data Download Modal -->
+<!-- Download Modal -->
 <div id="modal-backdrop" onclick="toggleModal(false)" style="display:none; position:fixed; inset:0; background:rgba(42,37,33,0.5); backdrop-filter:blur(4px); z-index:150;"></div>
-<div id="download-modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); width:90%; max-width:520px; background:var(--card); border:1px solid var(--line); border-radius:18px; padding:26px; box-shadow:var(--shadow); z-index:160;">
-  <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;">
+<div id="download-modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); width:90%; max-width:540px; background:var(--card); border:1px solid var(--line); border-radius:18px; padding:24px; box-shadow:var(--shadow); z-index:160;">
+  <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
     <div>
-      <div class="badge">Export & Rådata</div>
-      <h2 style="margin:2px 0 0; font-family:'Fraunces',serif; font-size:22px; color:var(--ink);">Ladda ner filer</h2>
+      <div class="badge">Export & CAD-filer</div>
+      <h2 style="margin:2px 0 0; font-family:'Fraunces',serif; font-size:21px; color:var(--ink);">Ladda ner CAD & Rådata</h2>
     </div>
     <button onclick="toggleModal(false)" style="border:0; background:none; font-size:22px; cursor:pointer; color:var(--ink-soft); line-height:1;">&times;</button>
   </div>
-  <p style="font-size:13.5px; color:var(--ink-soft); margin:0 0 18px;">
-    Alla filer är georefererade i <b>SWEREF99 TM</b> och höjdsystem <b>RH2000</b> från Lantmäteriets officiella API:er.
+  <p style="font-size:13px; color:var(--ink-soft); margin:0 0 16px;">
+    Officiell Lantmäteriet laserdata i <b>SWEREF99 TM</b> och höjdsystem <b>RH2000</b>. Inkluderar 3D-höjdkurvor och 66 officiella gränspunkter (tomtknutar).
   </p>
-  <div style="display:flex; flex-direction:column; gap:10px;">
-    <a href="Tumlehed_Lilla_1_18_Hojdkurvor_3D.dxf" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
+  <div style="display:flex; flex-direction:column; gap:9px;">
+    <a href="Tumlehed_Lilla_1_18_Hojdkurvor_3D.dwg" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:#fff2ee; border:1.5px solid var(--accent); border-radius:10px; text-decoration:none; color:var(--ink);">
       <div>
-        <div style="font-weight:600; font-size:14px; color:var(--accent);">📐 3D CAD-modell (.DXF)</div>
-        <div style="font-size:12px; color:var(--ink-soft);">AutoCAD, Revit, ArchiCAD, Rhino, QGIS · 8.5 MB</div>
+        <div style="font-weight:700; font-size:14px; color:var(--accent);">⭐ 3D Autodesk DWG (.DWG)</div>
+        <div style="font-size:11.5px; color:var(--ink-soft);">Äkta binär DWG med 3D-höjdkurvor & gränspunkter · 1.1 MB</div>
       </div>
-      <span style="font-size:12.5px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
+      <span style="font-size:12.5px; font-weight:700; color:var(--accent);">Ladda ner &darr;</span>
     </a>
-    <a href="Tumlehed_Lilla_1_18_Topografisk_Karta.png" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
+    <a href="Tumlehed_Lilla_1_18_Hojdkurvor_3D.dxf" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:11px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
       <div>
-        <div style="font-weight:600; font-size:14px;">🗺️ Högupplöst Plankarta (.PNG)</div>
-        <div style="font-size:12px; color:var(--ink-soft);">2D topografisk karta med fastighetsgränser · 4.6 MB</div>
+        <div style="font-weight:600; font-size:13.5px;">📐 3D AutoCAD DXF (.DXF)</div>
+        <div style="font-size:11.5px; color:var(--ink-soft);">Öppet CAD-format för AutoCAD, Revit, ArchiCAD, Rhino, QGIS · 3.2 MB</div>
       </div>
-      <span style="font-size:12.5px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
+      <span style="font-size:12px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
     </a>
-    <a href="data/hojd_punkter.csv" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
+    <a href="Tumlehed_Lilla_1_18_Topografisk_Karta.png" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:11px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
       <div>
-        <div style="font-weight:600; font-size:14px;">📊 Punktlista med Höjder (.CSV)</div>
-        <div style="font-size:12px; color:var(--ink-soft);">43 425 punkter (Easting, Northing, Höjd RH2000) · 1.5 MB</div>
+        <div style="font-weight:600; font-size:13.5px;">🗺️ Högupplöst Plankarta (.PNG)</div>
+        <div style="font-size:11.5px; color:var(--ink-soft);">2D topografisk karta med tomtnummer och gränspunkter · 3.8 MB</div>
       </div>
-      <span style="font-size:12.5px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
+      <span style="font-size:12px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
     </a>
-    <a href="data/parcels.geojson" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
+    <a href="data/markers.json" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:11px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
       <div>
-        <div style="font-weight:600; font-size:14px;">🌐 Fastighetsgränser (.GeoJSON)</div>
-        <div style="font-size:12px; color:var(--ink-soft);">Alla 42 tomter i området (Fastighetsindelning Direkt) · 68 KB</div>
+        <div style="font-weight:600; font-size:13.5px;">📍 66 Gränspunkter / Tomtknutar (.JSON)</div>
+        <div style="font-size:11.5px; color:var(--ink-soft);">Officiella tomtmarkeringar (dubb i berg, rör i mark, råsten) · 12 KB</div>
       </div>
-      <span style="font-size:12.5px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
+      <span style="font-size:12px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
     </a>
-    <a href="data/contours.json" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
+    <a href="data/hojd_punkter.csv" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:11px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
       <div>
-        <div style="font-weight:600; font-size:14px;">〰️ Höjdkurvor (.JSON)</div>
-        <div style="font-size:12px; color:var(--ink-soft);">Vektoriserade 3D-isolines (0.5m ekvidistans) · 1.2 MB</div>
+        <div style="font-weight:600; font-size:13.5px;">📊 Punktlista med Höjder (.CSV)</div>
+        <div style="font-size:11.5px; color:var(--ink-soft);">37 506 mätpunkter (Easting, Northing, Höjd RH2000) · 1.3 MB</div>
       </div>
-      <span style="font-size:12.5px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
+      <span style="font-size:12px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
+    </a>
+    <a href="data/parcels.geojson" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:11px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
+      <div>
+        <div style="font-weight:600; font-size:13.5px;">🌐 Tomtgränser (.GeoJSON)</div>
+        <div style="font-size:11.5px; color:var(--ink-soft);">Vektoriserade tomtpolygoner i SWEREF99 TM · 32 KB</div>
+      </div>
+      <span style="font-size:12px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
     </a>
   </div>
 </div>
@@ -259,21 +249,33 @@
     <div class="section-title">Kameravyer</div>
     <div class="cam-btns">
       <button class="cam-btn active" onclick="setCamera('iso')">🏔️ Isometrisk</button>
-      <button class="cam-btn" onclick="setCamera('sea')">🌊 Från havet</button>
+      <button class="cam-btn" onclick="setCamera('corridor')">🎯 Tomtkorridor</button>
       <button class="cam-btn" onclick="setCamera('top')">🧭 Fågelperspektiv</button>
-      <button class="cam-btn" onclick="setCamera('site')">🎯 Tomt 1:18</button>
+      <button class="cam-btn" onclick="setCamera('lilleby')">📍 Mot Lilleby 4:8</button>
     </div>
   </div>
 
   <div class="control-group">
-    <div class="section-title">Lager</div>
+    <div class="section-title">Lager & Markörer</div>
     <div class="toggle-row">
-      <label for="tog-surface">Terrängmodell (Mesh)</label>
+      <label for="tog-surface">Terräng (Mesh)</label>
       <input type="checkbox" id="tog-surface" checked onchange="toggleSurface(this.checked)">
     </div>
     <div class="toggle-row">
-      <label for="tog-wireframe">Trådmodell (Wireframe)</label>
-      <input type="checkbox" id="tog-wireframe" onchange="toggleWireframe(this.checked)">
+      <label for="tog-markers" style="color:var(--accent); font-weight:600;">📍 66 Gränspunkter (Pins)</label>
+      <input type="checkbox" id="tog-markers" checked onchange="toggleMarkers(this.checked)">
+    </div>
+    <div class="toggle-row">
+      <label for="tog-labels" style="color:var(--oak-deep); font-weight:600;">🏷️ Tomtbeteckningar</label>
+      <input type="checkbox" id="tog-labels" checked onchange="toggleLabels(this.checked)">
+    </div>
+    <div class="toggle-row">
+      <label for="tog-parcels-1945" style="color:#d9381e; font-weight:600;">Tomtgränser 1945 (Röd)</label>
+      <input type="checkbox" id="tog-parcels-1945" checked onchange="toggleParcels1945(this.checked)">
+    </div>
+    <div class="toggle-row">
+      <label for="tog-lilleby" style="color:var(--blue); font-weight:600;">Lilleby 4:8 (Blå)</label>
+      <input type="checkbox" id="tog-lilleby" checked onchange="toggleLilleby(this.checked)">
     </div>
     <div class="toggle-row">
       <label for="tog-contours-index">Huvudkurvor (2.5 m)</label>
@@ -284,16 +286,8 @@
       <input type="checkbox" id="tog-contours-base" checked onchange="toggleContoursBase(this.checked)">
     </div>
     <div class="toggle-row">
-      <label for="tog-parcel-118" style="color:var(--accent); font-weight:600;">Tumlehed 1:18 (Röd)</label>
-      <input type="checkbox" id="tog-parcel-118" checked onchange="toggleParcel118(this.checked)">
-    </div>
-    <div class="toggle-row">
-      <label for="tog-parcels-other">Grannfastigheter</label>
-      <input type="checkbox" id="tog-parcels-other" checked onchange="toggleParcelsOther(this.checked)">
-    </div>
-    <div class="toggle-row">
-      <label for="tog-sea">Saltsjön (Havsyta)</label>
-      <input type="checkbox" id="tog-sea" checked onchange="toggleSea(this.checked)">
+      <label for="tog-wireframe">Trådmodell</label>
+      <input type="checkbox" id="tog-wireframe" onchange="toggleWireframe(this.checked)">
     </div>
   </div>
 
@@ -306,13 +300,6 @@
       </div>
       <input type="range" id="slider-exag" min="0.5" max="3.0" step="0.1" value="1.5" oninput="setExaggeration(this.value)">
     </div>
-    <div class="slider-row" style="margin-top:10px;">
-      <div class="slider-label">
-        <span>Havsnivå (Saltsjön)</span>
-        <span id="val-sea">0.0 m</span>
-      </div>
-      <input type="range" id="slider-sea" min="-1.0" max="6.0" step="0.2" value="0.0" oninput="setSeaLevel(this.value)">
-    </div>
   </div>
 
   <div class="control-group">
@@ -320,12 +307,14 @@
     <div class="legend-bar"></div>
     <div class="legend-labels">
       <span>0 m (Hav)</span>
-      <span>15 m</span>
-      <span>30 m</span>
-      <span>50 m (Berg)</span>
+      <span>10 m</span>
+      <span>20 m</span>
+      <span>32 m (Berg)</span>
     </div>
   </div>
 </div>
+
+<div id="labels-container" style="position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:5;"></div>
 
 <div id="tooltip">
   <div><b>Höjd:</b> <span id="tt-z">--</span> m ö.h.</div>
@@ -336,16 +325,16 @@
 
 <script>
 let scene, camera, renderer, controls;
-let terrainMesh, seaMesh;
+let terrainMesh, markersGroup;
 let contourLinesIndex = [], contourLinesBase = [];
-let parcelLines118 = [], parcelLinesOther = [];
-let gridData, contoursData, parcelsData;
+let parcelLines1945 = [], parcelLinesLilleby = [], parcelLinesOther = [];
+let gridData, contoursData, parcelsData, markersData;
 let currentExag = 1.5;
-let currentSeaLevel = 0.0;
 let raycaster, mouse;
+let domLabels = [];
 
-const originE = 305100.0;
-const originN = 6403160.0;
+const originE = 305150.0;
+const originN = 6404300.0;
 
 async function init() {
   const canvas = document.getElementById("viewport");
@@ -357,38 +346,31 @@ async function init() {
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0xe5ded5);
-  scene.fog = new THREE.FogExp2(0xe5ded5, 0.0012);
+  scene.fog = new THREE.FogExp2(0xe5ded5, 0.0016);
 
-  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 4000);
-  camera.position.set(-250, 320, 480);
+  camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 3000);
+  camera.position.set(-180, 220, 340);
 
   controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.dampingFactor = 0.08;
-  controls.maxPolarAngle = Math.PI / 2 - 0.05; // Don't go below ground
+  controls.maxPolarAngle = Math.PI / 2 - 0.05;
   controls.minDistance = 20;
-  controls.maxDistance = 1200;
-  controls.target.set(240, 20 * currentExag, 280);
+  controls.maxDistance = 900;
+  controls.target.set(265, 14 * currentExag, 140);
 
   // Lighting
-  const ambient = new THREE.AmbientLight(0xfff8f0, 0.85);
+  const ambient = new THREE.AmbientLight(0xfff8f0, 0.9);
   scene.add(ambient);
 
-  const sun = new THREE.DirectionalLight(0xfff2e0, 1.1);
-  sun.position.set(300, 500, 200);
+  const sun = new THREE.DirectionalLight(0xfff2e0, 1.15);
+  sun.position.set(200, 400, 150);
   sun.castShadow = true;
   sun.shadow.mapSize.width = 2048;
   sun.shadow.mapSize.height = 2048;
-  sun.shadow.camera.near = 50;
-  sun.shadow.camera.far = 1500;
-  const d = 400;
-  sun.shadow.camera.left = -d;
-  sun.shadow.camera.right = d;
-  sun.shadow.camera.top = d;
-  sun.shadow.camera.bottom = -d;
   scene.add(sun);
 
-  const hemi = new THREE.HemisphereLight(0xddeeff, 0xaabb88, 0.4);
+  const hemi = new THREE.HemisphereLight(0xddeeff, 0xaabb88, 0.45);
   scene.add(hemi);
 
   raycaster = new THREE.Raycaster();
@@ -396,12 +378,12 @@ async function init() {
   window.addEventListener('mousemove', onMouseMove);
   window.addEventListener('resize', onWindowResize);
 
-  // Load Data
   await loadData();
   buildTerrain();
-  buildSea();
   buildContours();
   buildParcels();
+  buildMarkers();
+  buildDomLabels();
 
   document.getElementById("loader").style.opacity = "0";
   setTimeout(() => document.getElementById("loader").style.display = "none", 500);
@@ -410,31 +392,26 @@ async function init() {
 }
 
 async function loadData() {
-  const [g, c, p] = await Promise.all([
-    fetch("data/grid.json").then(r => r.json()),
-    fetch("data/contours.json").then(r => r.json()),
-    fetch("data/parcels.json").then(r => r.json())
+  const [g, c, p, m] = await Promise.all([
+    fetch("data/grid.json?v=" + Date.now()).then(r => r.json()),
+    fetch("data/contours.json?v=" + Date.now()).then(r => r.json()),
+    fetch("data/parcels.json?v=" + Date.now()).then(r => r.json()),
+    fetch("data/markers.json?v=" + Date.now()).then(r => r.json())
   ]);
   gridData = g;
   contoursData = c;
   parcelsData = p;
+  markersData = m;
 }
 
 function getTerrainColor(z) {
-  // Height colormap from sea level (0m) to rocky ridge (50m)
-  const norm = Math.max(0, Math.min(1, z / 50.0));
-  if (norm < 0.15) {
-    // Sea / coastal valley
-    return new THREE.Color().lerpColors(new THREE.Color(0x386b99), new THREE.Color(0x4ea375), norm / 0.15);
-  } else if (norm < 0.45) {
-    // Green lowlands & slopes
-    return new THREE.Color().lerpColors(new THREE.Color(0x4ea375), new THREE.Color(0xd6d172), (norm - 0.15) / 0.3);
-  } else if (norm < 0.75) {
-    // Rocky heath / hillside
-    return new THREE.Color().lerpColors(new THREE.Color(0xd6d172), new THREE.Color(0xb58857), (norm - 0.45) / 0.3);
+  const norm = Math.max(0, Math.min(1, z / 32.0));
+  if (norm < 0.2) {
+    return new THREE.Color().lerpColors(new THREE.Color(0x386b99), new THREE.Color(0x4ea375), norm / 0.2);
+  } else if (norm < 0.5) {
+    return new THREE.Color().lerpColors(new THREE.Color(0x4ea375), new THREE.Color(0xd6d172), (norm - 0.2) / 0.3);
   } else {
-    // Exposed granite summit
-    return new THREE.Color().lerpColors(new THREE.Color(0xb58857), new THREE.Color(0xd6d5d2), (norm - 0.75) / 0.25);
+    return new THREE.Color().lerpColors(new THREE.Color(0xd6d172), new THREE.Color(0xb58857), (norm - 0.5) / 0.5);
   }
 }
 
@@ -448,7 +425,6 @@ function buildTerrain() {
   const colors = [];
 
   for (let i = 0; i < pos.count; i++) {
-    // Note: PlaneGeometry indices layout
     const z = elevations[i] || 0.0;
     pos.setY(i, z * currentExag);
     const col = getTerrainColor(z);
@@ -461,8 +437,7 @@ function buildTerrain() {
   const mat = new THREE.MeshStandardMaterial({
     vertexColors: true,
     roughness: 0.85,
-    metalness: 0.08,
-    flatShading: false
+    metalness: 0.08
   });
 
   terrainMesh = new THREE.Mesh(geom, mat);
@@ -471,22 +446,12 @@ function buildTerrain() {
   scene.add(terrainMesh);
 }
 
-function buildSea() {
-  const { width, height } = gridData;
-  const geom = new THREE.PlaneGeometry(width * 1.4, height * 1.4);
-  geom.rotateX(-Math.PI / 2);
-  geom.translate(width / 2, currentSeaLevel * currentExag, height / 2);
-
-  const mat = new THREE.MeshStandardMaterial({
-    color: 0x2b6cb0,
-    transparent: true,
-    opacity: 0.65,
-    roughness: 0.15,
-    metalness: 0.4
-  });
-
-  seaMesh = new THREE.Mesh(geom, mat);
-  scene.add(seaMesh);
+function sampleZ(x_rel, y_rel) {
+  if (!gridData) return 0.0;
+  const { width, height, nx, ny, elevations } = gridData;
+  const gx = Math.max(0, Math.min(nx - 1, Math.round((x_rel / width) * (nx - 1))));
+  const gy = Math.max(0, Math.min(ny - 1, Math.round((y_rel / height) * (ny - 1))));
+  return elevations[gy * nx + gx] || 0.0;
 }
 
 function buildContours() {
@@ -496,9 +461,7 @@ function buildContours() {
   for (const c of contoursData) {
     const pts = [];
     for (const p of c.pts) {
-      // p = [x_rel, y_rel, z]
-      // Three.js coords: X=East, Y=Elevation, Z=North
-      pts.push(new THREE.Vector3(p[0], (p[2] + 0.15) * currentExag, p[1]));
+      pts.push(new THREE.Vector3(p[0], (p[2] + 0.12) * currentExag, p[1]));
     }
     const geom = new THREE.BufferGeometry().setFromPoints(pts);
     const line = new THREE.Line(geom, c.is_index ? matIndex : matBase);
@@ -513,40 +476,120 @@ function buildContours() {
   }
 }
 
-function sampleZ(x_rel, y_rel) {
-  if (!gridData) return 0.0;
-  const { width, height, nx, ny, elevations } = gridData;
-  const gx = Math.max(0, Math.min(nx - 1, Math.round((x_rel / width) * (nx - 1))));
-  const gy = Math.max(0, Math.min(ny - 1, Math.round((y_rel / height) * (ny - 1))));
-  const idx = gy * nx + gx;
-  return elevations[idx] || 0.0;
-}
-
 function buildParcels() {
-  const mat118 = new THREE.LineBasicMaterial({ color: 0xe02424, linewidth: 3.5 });
-  const matOther = new THREE.LineDashedMaterial({ color: 0x332a24, linewidth: 1.2, dashSize: 6, gapSize: 3, transparent: true, opacity: 0.7 });
+  const mat1945 = new THREE.LineBasicMaterial({ color: 0xd92626, linewidth: 3.5 });
+  const matLilleby = new THREE.LineBasicMaterial({ color: 0x1f5cb2, linewidth: 3.5 });
+  const matOther = new THREE.LineDashedMaterial({ color: 0x332a24, linewidth: 1.2, dashSize: 4, gapSize: 2, transparent: true, opacity: 0.7 });
 
   for (const p of parcelsData) {
-    const is118 = p.is_1_18;
+    const is1945 = p.is_1945;
+    const isLilleby = p.is_lilleby;
+    const mat = isLilleby ? matLilleby : is1945 ? mat1945 : matOther;
+
     for (const ring of p.rings) {
       const pts = [];
       for (const pt of ring) {
         const x = pt[0];
         const y = pt[1];
         const z = sampleZ(x, y);
-        pts.push(new THREE.Vector3(x, (z + (is118 ? 0.35 : 0.2)) * currentExag, y));
+        pts.push(new THREE.Vector3(x, (z + (is1945 || isLilleby ? 0.3 : 0.18)) * currentExag, y));
       }
       const geom = new THREE.BufferGeometry().setFromPoints(pts);
-      const line = new THREE.Line(geom, is118 ? mat118 : matOther);
-      if (!is118) line.computeLineDistances();
+      const line = new THREE.Line(geom, mat);
+      if (!is1945 && !isLilleby) line.computeLineDistances();
 
-      if (is118) {
-        parcelLines118.push(line);
+      if (isLilleby) {
+        parcelLinesLilleby.push(line);
+      } else if (is1945) {
+        parcelLines1945.push(line);
       } else {
         parcelLinesOther.push(line);
       }
       scene.add(line);
     }
+  }
+}
+
+function buildMarkers() {
+  markersGroup = new THREE.Group();
+  const pinGeom = new THREE.SphereGeometry(1.0, 16, 16);
+  const pinMat = new THREE.MeshStandardMaterial({ color: 0xff2222, roughness: 0.3, metalness: 0.2 });
+  const stalkMat = new THREE.MeshBasicMaterial({ color: 0x333333 });
+
+  for (const m of markersData) {
+    const x = m.x_rel;
+    const y = m.y_rel;
+    const z = m.z * currentExag;
+
+    // Pin head
+    const head = new THREE.Mesh(pinGeom, pinMat);
+    head.position.set(x, z + 2.8, y);
+    head.userData = m;
+
+    // Stalk
+    const stalkGeom = new THREE.CylinderGeometry(0.12, 0.12, 2.8, 8);
+    const stalk = new THREE.Mesh(stalkGeom, stalkMat);
+    stalk.position.set(x, z + 1.4, y);
+
+    const pin = new THREE.Group();
+    pin.add(head);
+    pin.add(stalk);
+    markersGroup.add(pin);
+  }
+  scene.add(markersGroup);
+}
+
+function buildDomLabels() {
+  const container = document.getElementById("labels-container");
+  container.innerHTML = "";
+  domLabels = [];
+
+  for (const p of parcelsData) {
+    if (!p.is_1945 && !p.is_lilleby) continue;
+    // Calculate centroid of first ring
+    const ring = p.rings[0];
+    if (!ring || ring.length < 3) continue;
+    let cx = 0, cy = 0;
+    for (let i = 0; i < ring.length - 1; i++) {
+      cx += ring[i][0];
+      cy += ring[i][1];
+    }
+    cx /= (ring.length - 1);
+    cy /= (ring.length - 1);
+    const z = sampleZ(cx, cy);
+
+    const el = document.createElement("div");
+    el.className = "label-3d " + (p.is_lilleby ? "label-lilleby" : "label-1945");
+    el.innerText = p.etikett;
+    container.appendChild(el);
+
+    domLabels.push({
+      el,
+      pos: new THREE.Vector3(cx, z * currentExag + 2.5, cy)
+    });
+  }
+}
+
+function updateDomLabels() {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  const tempV = new THREE.Vector3();
+
+  for (const lbl of domLabels) {
+    tempV.copy(lbl.pos);
+    tempV.project(camera);
+
+    // Behind camera check
+    if (tempV.z > 1) {
+      lbl.el.style.opacity = "0";
+      continue;
+    }
+
+    const x = (tempV.x * 0.5 + 0.5) * width;
+    const y = (-(tempV.y * 0.5) + 0.5) * height;
+    lbl.el.style.left = `${x}px`;
+    lbl.el.style.top = `${y}px`;
+    lbl.el.style.opacity = "1";
   }
 }
 
@@ -556,24 +599,17 @@ function updateExaggeration() {
   const { elevations } = gridData;
 
   for (let i = 0; i < pos.count; i++) {
-    const z = elevations[i] || 0.0;
-    pos.setY(i, z * currentExag);
+    pos.setY(i, (elevations[i] || 0.0) * currentExag);
   }
   pos.needsUpdate = true;
   terrainMesh.geometry.computeVertexNormals();
 
-  if (seaMesh) {
-    seaMesh.position.y = currentSeaLevel * currentExag;
-  }
-
-  // Update contours
-  const updateLines = (list, dataList) => {
-    let dIdx = 0;
+  const updateLines = (list) => {
     for (const line of list) {
       const pts = line.geometry.attributes.position;
       const orig = line.userData.z;
       for (let i = 0; i < pts.count; i++) {
-        pts.setY(i, (orig + 0.15) * currentExag);
+        pts.setY(i, (orig + 0.12) * currentExag);
       }
       pts.needsUpdate = true;
     }
@@ -581,21 +617,38 @@ function updateExaggeration() {
   updateLines(contourLinesIndex);
   updateLines(contourLinesBase);
 
-  // Update parcels
-  const updateParcelList = (list) => {
+  const updateParcelList = (list, offset) => {
     for (const line of list) {
       const pts = line.geometry.attributes.position;
       for (let i = 0; i < pts.count; i++) {
         const x = pts.getX(i);
         const y = pts.getZ(i);
-        const z = sampleZ(x, y);
-        pts.setY(i, (z + 0.25) * currentExag);
+        pts.setY(i, (sampleZ(x, y) + offset) * currentExag);
       }
       pts.needsUpdate = true;
     }
   };
-  updateParcelList(parcelLines118);
-  updateParcelList(parcelLinesOther);
+  updateParcelList(parcelLines1945, 0.3);
+  updateParcelList(parcelLinesLilleby, 0.3);
+  updateParcelList(parcelLinesOther, 0.18);
+
+  // Update markers
+  if (markersGroup) {
+    let idx = 0;
+    for (const pin of markersGroup.children) {
+      const m = markersData[idx++];
+      if (!m) break;
+      const z = m.z * currentExag;
+      pin.children[0].position.y = z + 2.8;
+      pin.children[1].position.y = z + 1.4;
+    }
+  }
+
+  // Update labels
+  for (const lbl of domLabels) {
+    const z = sampleZ(lbl.pos.x, lbl.pos.z);
+    lbl.pos.y = z * currentExag + 2.5;
+  }
 }
 
 // ── UI Handlers ───────────────────────────────────────
@@ -613,16 +666,13 @@ function setCamera(view) {
   const cz = height / 2;
 
   if (view === 'iso') {
-    animateCamera(new THREE.Vector3(-150, 280, 500), new THREE.Vector3(cx, 15 * currentExag, cz));
-  } else if (view === 'sea') {
-    // Looking from south-west up the valley
-    animateCamera(new THREE.Vector3(cx, 80 * currentExag, -100), new THREE.Vector3(cx, 25 * currentExag, cz));
+    animateCamera(new THREE.Vector3(-120, 200, 280), new THREE.Vector3(cx, 14 * currentExag, cz));
+  } else if (view === 'corridor') {
+    animateCamera(new THREE.Vector3(cx, 160 * currentExag, cz + 180), new THREE.Vector3(cx, 12 * currentExag, cz));
   } else if (view === 'top') {
-    // Top-down 2D map view
-    animateCamera(new THREE.Vector3(cx, 650, cz + 0.1), new THREE.Vector3(cx, 0, cz));
-  } else if (view === 'site') {
-    // Focused on Tumlehed 1:18 (approx x=240, z=260)
-    animateCamera(new THREE.Vector3(140, 120 * currentExag, 360), new THREE.Vector3(240, 12 * currentExag, 260));
+    animateCamera(new THREE.Vector3(cx, 450, cz + 0.1), new THREE.Vector3(cx, 0, cz));
+  } else if (view === 'lilleby') {
+    animateCamera(new THREE.Vector3(width + 40, 110 * currentExag, height + 40), new THREE.Vector3(cx, 15 * currentExag, cz));
   }
 }
 
@@ -632,7 +682,7 @@ function animateCamera(newPos, newTarget) {
   let t = 0;
   const step = () => {
     t += 0.04;
-    const k = 0.5 - 0.5 * Math.cos(Math.PI * Math.min(1, t)); // Smooth easing
+    const k = 0.5 - 0.5 * Math.cos(Math.PI * Math.min(1, t));
     camera.position.lerpVectors(startPos, newPos, k);
     controls.target.lerpVectors(startTarget, newTarget, k);
     controls.update();
@@ -643,22 +693,17 @@ function animateCamera(newPos, newTarget) {
 
 function toggleSurface(v) { terrainMesh.visible = v; }
 function toggleWireframe(v) { terrainMesh.material.wireframe = v; }
+function toggleMarkers(v) { if (markersGroup) markersGroup.visible = v; }
+function toggleLabels(v) { document.getElementById("labels-container").style.display = v ? "block" : "none"; }
+function toggleParcels1945(v) { parcelLines1945.forEach(l => l.visible = v); }
+function toggleLilleby(v) { parcelLinesLilleby.forEach(l => l.visible = v); }
 function toggleContoursIndex(v) { contourLinesIndex.forEach(l => l.visible = v); }
 function toggleContoursBase(v) { contourLinesBase.forEach(l => l.visible = v); }
-function toggleParcel118(v) { parcelLines118.forEach(l => l.visible = v); }
-function toggleParcelsOther(v) { parcelLinesOther.forEach(l => l.visible = v); }
-function toggleSea(v) { seaMesh.visible = v; }
 
 function setExaggeration(val) {
   currentExag = parseFloat(val);
   document.getElementById("val-exag").innerText = currentExag.toFixed(1) + "x";
   updateExaggeration();
-}
-
-function setSeaLevel(val) {
-  currentSeaLevel = parseFloat(val);
-  document.getElementById("val-sea").innerText = (currentSeaLevel >= 0 ? "+" : "") + currentSeaLevel.toFixed(1) + " m";
-  if (seaMesh) seaMesh.position.y = currentSeaLevel * currentExag;
 }
 
 function onMouseMove(event) {
@@ -687,6 +732,7 @@ function onWindowResize() {
 function animate() {
   requestAnimationFrame(animate);
   controls.update();
+  updateDomLabels();
   renderer.render(scene, camera);
 }
 
