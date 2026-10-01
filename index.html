@@ -192,15 +192,67 @@
     <div class="sub">SWEREF99 TM / RH2000 · Höjdkurvor 0.5 m ekvidistans</div>
   </div>
   <div class="actions">
-    <a href="Tumlehed_Lilla_1_18_Hojdkurvor_3D.dxf" download class="btn btn-primary" title="Ladda ner CAD-fil">
+    <button onclick="toggleModal(true)" class="btn btn-primary" title="Ladda ner CAD och rådata">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Ladda ner 3D DXF
-    </a>
+      Ladda ner filer & rådata ▾
+    </button>
     <a href="Tumlehed_Lilla_1_18_Topografisk_Karta.png" target="_blank" class="btn">
       2D Plankarta
     </a>
   </div>
 </header>
+
+<!-- Raw Data Download Modal -->
+<div id="modal-backdrop" onclick="toggleModal(false)" style="display:none; position:fixed; inset:0; background:rgba(42,37,33,0.5); backdrop-filter:blur(4px); z-index:150;"></div>
+<div id="download-modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); width:90%; max-width:520px; background:var(--card); border:1px solid var(--line); border-radius:18px; padding:26px; box-shadow:var(--shadow); z-index:160;">
+  <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;">
+    <div>
+      <div class="badge">Export & Rådata</div>
+      <h2 style="margin:2px 0 0; font-family:'Fraunces',serif; font-size:22px; color:var(--ink);">Ladda ner filer</h2>
+    </div>
+    <button onclick="toggleModal(false)" style="border:0; background:none; font-size:22px; cursor:pointer; color:var(--ink-soft); line-height:1;">&times;</button>
+  </div>
+  <p style="font-size:13.5px; color:var(--ink-soft); margin:0 0 18px;">
+    Alla filer är georefererade i <b>SWEREF99 TM</b> och höjdsystem <b>RH2000</b> från Lantmäteriets officiella API:er.
+  </p>
+  <div style="display:flex; flex-direction:column; gap:10px;">
+    <a href="Tumlehed_Lilla_1_18_Hojdkurvor_3D.dxf" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
+      <div>
+        <div style="font-weight:600; font-size:14px; color:var(--accent);">📐 3D CAD-modell (.DXF)</div>
+        <div style="font-size:12px; color:var(--ink-soft);">AutoCAD, Revit, ArchiCAD, Rhino, QGIS · 8.5 MB</div>
+      </div>
+      <span style="font-size:12.5px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
+    </a>
+    <a href="Tumlehed_Lilla_1_18_Topografisk_Karta.png" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
+      <div>
+        <div style="font-weight:600; font-size:14px;">🗺️ Högupplöst Plankarta (.PNG)</div>
+        <div style="font-size:12px; color:var(--ink-soft);">2D topografisk karta med fastighetsgränser · 4.6 MB</div>
+      </div>
+      <span style="font-size:12.5px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
+    </a>
+    <a href="data/hojd_punkter.csv" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
+      <div>
+        <div style="font-weight:600; font-size:14px;">📊 Punktlista med Höjder (.CSV)</div>
+        <div style="font-size:12px; color:var(--ink-soft);">43 425 punkter (Easting, Northing, Höjd RH2000) · 1.5 MB</div>
+      </div>
+      <span style="font-size:12.5px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
+    </a>
+    <a href="data/parcels.geojson" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
+      <div>
+        <div style="font-weight:600; font-size:14px;">🌐 Fastighetsgränser (.GeoJSON)</div>
+        <div style="font-size:12px; color:var(--ink-soft);">Alla 42 tomter i området (Fastighetsindelning Direkt) · 68 KB</div>
+      </div>
+      <span style="font-size:12.5px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
+    </a>
+    <a href="data/contours.json" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
+      <div>
+        <div style="font-weight:600; font-size:14px;">〰️ Höjdkurvor (.JSON)</div>
+        <div style="font-size:12px; color:var(--ink-soft);">Vektoriserade 3D-isolines (0.5m ekvidistans) · 1.2 MB</div>
+      </div>
+      <span style="font-size:12.5px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
+    </a>
+  </div>
+</div>
 
 <div id="controls">
   <div class="control-group">
@@ -547,6 +599,11 @@ function updateExaggeration() {
 }
 
 // ── UI Handlers ───────────────────────────────────────
+function toggleModal(show) {
+  document.getElementById("modal-backdrop").style.display = show ? "block" : "none";
+  document.getElementById("download-modal").style.display = show ? "block" : "none";
+}
+
 function setCamera(view) {
   document.querySelectorAll('.cam-btn').forEach(b => b.classList.remove('active'));
   event.target.classList.add('active');
