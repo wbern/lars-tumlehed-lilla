@@ -187,7 +187,7 @@
 
 <!-- Download Modal -->
 <div id="modal-backdrop" onclick="toggleModal(false)" style="display:none; position:fixed; inset:0; background:rgba(42,37,33,0.5); backdrop-filter:blur(4px); z-index:150;"></div>
-<div id="download-modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); width:90%; max-width:540px; background:var(--card); border:1px solid var(--line); border-radius:18px; padding:24px; box-shadow:var(--shadow); z-index:160;">
+<div id="download-modal" style="display:none; max-height:90vh; overflow:auto; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); width:90%; max-width:540px; background:var(--card); border:1px solid var(--line); border-radius:18px; padding:24px; box-shadow:var(--shadow); z-index:160;">
   <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
     <div>
       <div class="badge">Export & CAD-filer</div>
@@ -196,64 +196,74 @@
     <button onclick="toggleModal(false)" style="border:0; background:none; font-size:22px; cursor:pointer; color:var(--ink-soft); line-height:1;">&times;</button>
   </div>
   <p style="font-size:13px; color:var(--ink-soft); margin:0 0 16px;">
-    Officiell Lantmäteriet laserdata i <b>SWEREF99 TM</b> och höjdsystem <b>RH2000</b>. Höjdkurvor (0,5 m ekvidistans) och 66 officiella gränspunkter (tomtknutar), i 2D (platt, Z=0, höjder som text) eller 3D (kurvor på sin höjd).
+    Officiell Lantmäteriet laserdata i <b>SWEREF99 TM</b> och höjdsystem <b>RH2000</b>. Terrängen som <b>en sammanhängande, förenklad yta</b> (ca 8 000 punkter / 16 000 trianglar, max 0,15 m avvikelse mot utjämnad mark), plus 2D-höjdkurvor och 66 gränspunkter.
   </p>
   <div style="display:flex; flex-direction:column; gap:9px;">
-    <a href="Tumlehed_Lilla_1_18_Hojdkurvor_2D.dwg" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:#fff2ee; border:1.5px solid var(--accent); border-radius:10px; text-decoration:none; color:var(--ink);">
+    <a href="Tumlehed_Lilla_1_18_Terrang.xyz" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:#fff2ee; border:1.5px solid var(--accent); border-radius:10px; text-decoration:none; color:var(--ink);">
       <div>
-        <div style="font-weight:700; font-size:14px; color:var(--accent);">⭐ 2D Autodesk DWG (.DWG)</div>
-        <div style="font-size:11.5px; color:var(--ink-soft);">Platta höjdkurvor (Z=0) med höjdtexter, tomter & gränspunkter · AutoCAD 2013 · 227 KB</div>
+        <div style="font-weight:700; font-size:14px; color:var(--accent);">⭐ Terrängmesh för Archicad (.XYZ)</div>
+        <div style="font-size:11.5px; color:var(--ink-soft);">Blir <b>ett</b> redigerbart Archicad-mesh · 8 058 punkter (E N Z, meter) · 232 KB</div>
       </div>
-      <span style="font-size:12.5px; font-weight:700; color:var(--accent);">Ladda ner &darr;</span>
+      <span style="font-size:12.5px; font-weight:700; color:var(--accent); white-space:nowrap; margin-left:10px;">Ladda ner &darr;</span>
+    </a>
+    <div style="font-size:12px; color:var(--ink-soft); background:var(--paper); border:1px dashed var(--line); border-radius:10px; padding:10px 14px; line-height:1.5;">
+      <b style="color:var(--ink);">Så här i Archicad 27:</b> Arkiv › Interoperabilitet › <i>Place Mesh from Surveyors Data</i> (Placera mesh från lantmäteridata). Välj .xyz-filen, enhet <b>meter</b>, nollnivå 0 över havet. Välj <i>Use coordinates of data file</i> för att hamna på samma SWEREF99-koordinater som DWG-filerna, annars <i>Define graphically</i>.
+    </div>
+    <a href="Tumlehed_Lilla_1_18_Terrang_3D.dwg" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:11px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
+      <div>
+        <div style="font-weight:600; font-size:13.5px;">🏔️ Terrängyta 3D (.DWG)</div>
+        <div style="font-size:11.5px; color:var(--ink-soft);">Samma yta som ett enda polyface-mesh, med 1945 års tomter & gränspunkter draperade på ytan · AutoCAD 2013 · 631 KB</div>
+      </div>
+      <span style="font-size:12px; font-weight:600; color:var(--oak-deep); white-space:nowrap; margin-left:10px;">Hämta &darr;</span>
+    </a>
+    <a href="Tumlehed_Lilla_1_18_Terrang_3D.dxf" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:11px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
+      <div>
+        <div style="font-weight:600; font-size:13.5px;">📐 Terrängyta 3D (.DXF)</div>
+        <div style="font-size:11.5px; color:var(--ink-soft);">Samma innehåll som 3D-DWG i öppet format · 3.6 MB</div>
+      </div>
+      <span style="font-size:12px; font-weight:600; color:var(--oak-deep); white-space:nowrap; margin-left:10px;">Hämta &darr;</span>
+    </a>
+    <a href="Tumlehed_Lilla_1_18_Hojdkurvor_2D.dwg" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:11px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
+      <div>
+        <div style="font-weight:600; font-size:13.5px;">🗺️ 2D-höjdkurvor (.DWG)</div>
+        <div style="font-size:11.5px; color:var(--ink-soft);">Platta höjdkurvor (Z=0, 0,5 m ekvidistans) med höjdtexter, tomter & gränspunkter · 226 KB</div>
+      </div>
+      <span style="font-size:12px; font-weight:600; color:var(--oak-deep); white-space:nowrap; margin-left:10px;">Hämta &darr;</span>
     </a>
     <a href="Tumlehed_Lilla_1_18_Hojdkurvor_2D.dxf" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:11px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
       <div>
-        <div style="font-weight:600; font-size:13.5px;">📐 2D AutoCAD DXF (.DXF)</div>
-        <div style="font-size:11.5px; color:var(--ink-soft);">Samma innehåll som 2D-DWG i öppet format · 813 KB</div>
+        <div style="font-weight:600; font-size:13.5px;">📐 2D-höjdkurvor (.DXF)</div>
+        <div style="font-size:11.5px; color:var(--ink-soft);">Samma innehåll som 2D-DWG i öppet format · 800 KB</div>
       </div>
-      <span style="font-size:12px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
-    </a>
-    <a href="Tumlehed_Lilla_1_18_Hojdkurvor_3D.dwg" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:11px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
-      <div>
-        <div style="font-weight:600; font-size:13.5px;">🏔️ 3D Autodesk DWG (.DWG)</div>
-        <div style="font-size:11.5px; color:var(--ink-soft);">Höjdkurvor som 3D-polylinjer på verklig höjd (RH2000) · AutoCAD 2013 · 512 KB</div>
-      </div>
-      <span style="font-size:12px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
-    </a>
-    <a href="Tumlehed_Lilla_1_18_Hojdkurvor_3D.dxf" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:11px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
-      <div>
-        <div style="font-weight:600; font-size:13.5px;">📐 3D AutoCAD DXF (.DXF)</div>
-        <div style="font-size:11.5px; color:var(--ink-soft);">Öppet CAD-format för AutoCAD, Revit, ArchiCAD, Rhino, QGIS · 3.2 MB</div>
-      </div>
-      <span style="font-size:12px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
+      <span style="font-size:12px; font-weight:600; color:var(--oak-deep); white-space:nowrap; margin-left:10px;">Hämta &darr;</span>
     </a>
     <a href="Tumlehed_Lilla_1_18_Topografisk_Karta.png" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:11px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
       <div>
         <div style="font-weight:600; font-size:13.5px;">🗺️ Högupplöst Plankarta (.PNG)</div>
         <div style="font-size:11.5px; color:var(--ink-soft);">2D topografisk karta med tomtnummer och gränspunkter · 3.8 MB</div>
       </div>
-      <span style="font-size:12px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
+      <span style="font-size:12px; font-weight:600; color:var(--oak-deep); white-space:nowrap; margin-left:10px;">Hämta &darr;</span>
     </a>
     <a href="data/markers.json" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:11px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
       <div>
         <div style="font-weight:600; font-size:13.5px;">📍 66 Gränspunkter / Tomtknutar (.JSON)</div>
         <div style="font-size:11.5px; color:var(--ink-soft);">Officiella tomtmarkeringar (dubb i berg, rör i mark, råsten) · 12 KB</div>
       </div>
-      <span style="font-size:12px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
+      <span style="font-size:12px; font-weight:600; color:var(--oak-deep); white-space:nowrap; margin-left:10px;">Hämta &darr;</span>
     </a>
     <a href="data/hojd_punkter.csv" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:11px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
       <div>
         <div style="font-weight:600; font-size:13.5px;">📊 Punktlista med Höjder (.CSV)</div>
         <div style="font-size:11.5px; color:var(--ink-soft);">37 506 mätpunkter (Easting, Northing, Höjd RH2000) · 1.3 MB</div>
       </div>
-      <span style="font-size:12px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
+      <span style="font-size:12px; font-weight:600; color:var(--oak-deep); white-space:nowrap; margin-left:10px;">Hämta &darr;</span>
     </a>
     <a href="data/parcels.geojson" download class="file-row" style="display:flex; align-items:center; justify-content:space-between; padding:11px 14px; background:var(--paper); border:1px solid var(--line); border-radius:10px; text-decoration:none; color:var(--ink);">
       <div>
         <div style="font-weight:600; font-size:13.5px;">🌐 Tomtgränser (.GeoJSON)</div>
         <div style="font-size:11.5px; color:var(--ink-soft);">Vektoriserade tomtpolygoner i SWEREF99 TM · 32 KB</div>
       </div>
-      <span style="font-size:12px; font-weight:600; color:var(--oak-deep);">Hämta &darr;</span>
+      <span style="font-size:12px; font-weight:600; color:var(--oak-deep); white-space:nowrap; margin-left:10px;">Hämta &darr;</span>
     </a>
   </div>
 </div>
@@ -363,7 +373,7 @@ async function init() {
   scene.fog = new THREE.FogExp2(0xe5ded5, 0.0016);
 
   camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 3000);
-  camera.position.set(-180, 220, 340);
+  camera.position.set(-180, 220, 60);
 
   controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
@@ -371,7 +381,7 @@ async function init() {
   controls.maxPolarAngle = Math.PI / 2 - 0.05;
   controls.minDistance = 20;
   controls.maxDistance = 900;
-  controls.target.set(265, 14 * currentExag, 140);
+  controls.target.set(265, 14 * currentExag, -140);
 
   // Lighting
   const ambient = new THREE.AmbientLight(0xfff8f0, 0.9);
@@ -432,14 +442,16 @@ function getTerrainColor(z) {
 function buildTerrain() {
   const { width, height, nx, ny, elevations } = gridData;
   const geom = new THREE.PlaneGeometry(width, height, nx - 1, ny - 1);
+  // Scene axes: x = east, y = up, z = -north (right-handed, so the map is not mirrored).
+  // PlaneGeometry rows run north -> south, grid rows run south -> north.
   geom.rotateX(-Math.PI / 2);
-  geom.translate(width / 2, 0, height / 2);
+  geom.translate(width / 2, 0, -height / 2);
 
   const pos = geom.attributes.position;
   const colors = [];
 
   for (let i = 0; i < pos.count; i++) {
-    const z = elevations[i] || 0.0;
+    const z = elevations[gridIndex(i)] || 0.0;
     pos.setY(i, z * currentExag);
     const col = getTerrainColor(z);
     colors.push(col.r, col.g, col.b);
@@ -460,6 +472,12 @@ function buildTerrain() {
   scene.add(terrainMesh);
 }
 
+// PlaneGeometry vertex index -> grid.json elevation index (rows flipped N/S)
+function gridIndex(i) {
+  const { nx, ny } = gridData;
+  return (ny - 1 - Math.floor(i / nx)) * nx + (i % nx);
+}
+
 function sampleZ(x_rel, y_rel) {
   if (!gridData) return 0.0;
   const { width, height, nx, ny, elevations } = gridData;
@@ -475,7 +493,7 @@ function buildContours() {
   for (const c of contoursData) {
     const pts = [];
     for (const p of c.pts) {
-      pts.push(new THREE.Vector3(p[0], (p[2] + 0.12) * currentExag, p[1]));
+      pts.push(new THREE.Vector3(p[0], (p[2] + 0.12) * currentExag, -p[1]));
     }
     const geom = new THREE.BufferGeometry().setFromPoints(pts);
     const line = new THREE.Line(geom, c.is_index ? matIndex : matBase);
@@ -506,7 +524,7 @@ function buildParcels() {
         const x = pt[0];
         const y = pt[1];
         const z = sampleZ(x, y);
-        pts.push(new THREE.Vector3(x, (z + (is1945 || isLilleby ? 0.3 : 0.18)) * currentExag, y));
+        pts.push(new THREE.Vector3(x, (z + (is1945 || isLilleby ? 0.3 : 0.18)) * currentExag, -y));
       }
       const geom = new THREE.BufferGeometry().setFromPoints(pts);
       const line = new THREE.Line(geom, mat);
@@ -537,13 +555,13 @@ function buildMarkers() {
 
     // Pin head
     const head = new THREE.Mesh(pinGeom, pinMat);
-    head.position.set(x, z + 2.8, y);
+    head.position.set(x, z + 2.8, -y);
     head.userData = m;
 
     // Stalk
     const stalkGeom = new THREE.CylinderGeometry(0.12, 0.12, 2.8, 8);
     const stalk = new THREE.Mesh(stalkGeom, stalkMat);
-    stalk.position.set(x, z + 1.4, y);
+    stalk.position.set(x, z + 1.4, -y);
 
     const pin = new THREE.Group();
     pin.add(head);
@@ -579,7 +597,7 @@ function buildDomLabels() {
 
     domLabels.push({
       el,
-      pos: new THREE.Vector3(cx, z * currentExag + 2.5, cy)
+      pos: new THREE.Vector3(cx, z * currentExag + 2.5, -cy)
     });
   }
 }
@@ -613,7 +631,7 @@ function updateExaggeration() {
   const { elevations } = gridData;
 
   for (let i = 0; i < pos.count; i++) {
-    pos.setY(i, (elevations[i] || 0.0) * currentExag);
+    pos.setY(i, (elevations[gridIndex(i)] || 0.0) * currentExag);
   }
   pos.needsUpdate = true;
   terrainMesh.geometry.computeVertexNormals();
@@ -636,7 +654,7 @@ function updateExaggeration() {
       const pts = line.geometry.attributes.position;
       for (let i = 0; i < pts.count; i++) {
         const x = pts.getX(i);
-        const y = pts.getZ(i);
+        const y = -pts.getZ(i);
         pts.setY(i, (sampleZ(x, y) + offset) * currentExag);
       }
       pts.needsUpdate = true;
@@ -660,7 +678,7 @@ function updateExaggeration() {
 
   // Update labels
   for (const lbl of domLabels) {
-    const z = sampleZ(lbl.pos.x, lbl.pos.z);
+    const z = sampleZ(lbl.pos.x, -lbl.pos.z);
     lbl.pos.y = z * currentExag + 2.5;
   }
 }
@@ -677,16 +695,16 @@ function setCamera(view) {
 
   const { width, height } = gridData;
   const cx = width / 2;
-  const cz = height / 2;
+  const cz = -height / 2;
 
   if (view === 'iso') {
-    animateCamera(new THREE.Vector3(-120, 200, 280), new THREE.Vector3(cx, 14 * currentExag, cz));
+    animateCamera(new THREE.Vector3(-120, 200, cz + 140), new THREE.Vector3(cx, 14 * currentExag, cz));
   } else if (view === 'corridor') {
     animateCamera(new THREE.Vector3(cx, 160 * currentExag, cz + 180), new THREE.Vector3(cx, 12 * currentExag, cz));
   } else if (view === 'top') {
     animateCamera(new THREE.Vector3(cx, 450, cz + 0.1), new THREE.Vector3(cx, 0, cz));
   } else if (view === 'lilleby') {
-    animateCamera(new THREE.Vector3(width + 40, 110 * currentExag, height + 40), new THREE.Vector3(cx, 15 * currentExag, cz));
+    animateCamera(new THREE.Vector3(width + 40, 110 * currentExag, cz + height / 2 + 40), new THREE.Vector3(cx, 15 * currentExag, cz));
   }
 }
 
@@ -731,7 +749,7 @@ function onMouseMove(event) {
     const pt = intersects[0].point;
     const realZ = pt.y / currentExag;
     const realE = originE + pt.x;
-    const realN = originN + pt.z;
+    const realN = originN - pt.z;
     document.getElementById("tt-z").innerText = realZ.toFixed(1);
     document.getElementById("tt-xy").innerText = `${Math.round(realE)} E, ${Math.round(realN)} N`;
   }
